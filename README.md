@@ -6,6 +6,8 @@
 2. [Common WebDriver Properties](#common-webdriver-properties)
 3. [BrowserOptions & DesiredCapabilities](#browseroptions--desiredcapabilities)
 4. [Window Size, Handles & Screenshot](#window-size-handles--screenshot)
+5. [Alert, iFrame & Cookie](#alert-iframe--cookie)
+6. [ActionChains & Wait](#actionchains--wait)
 
 ## WebDriver Setup
 ```python
@@ -128,6 +130,59 @@ driver.save_screenshot('test.png')
 ```
 **[⬆ back to top](#table-of-contents)**
 
+## Alert, iFrame & Cookie
+```python
+# Alert
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+driver.get('https://the-internet.herokuapp.com/javascript_alerts')
+js_prompt = driver.find_element(By.XPATH, "//button[text() = 'Click for JS Prompt']")
+
+js_prompt.click()
+alert = driver.switch_to.alert
+print(alert.text)
+alert.send_keys("Hello Selenium!")
+alert.accept()
+alert.dismiss()
+```
+```python
+# iFrame
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+driver.get('https://the-internet.herokuapp.com/iframe')
+iframe = driver.find_element(By.ID, 'mce_0_ifr')
+
+driver.switch_to.frame(iframe) # frame_name, index also available
+
+para = driver.find_element(By.XPATH, "//p[text() = 'Your content goes here.']")
+print(para.text) # Your content goes here.
+para.clear()
+```
+```python
+# Cookie
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=ops)
+driver.get('https://the-internet.herokuapp.com')
+
+driver.add_cookie({"name": "foo", "value": "bar"})
+driver.get_cookie("foo") # bar
+driver.get_cookies()
+driver.delete_cookie("foo")
+driver.delete_all_cookies()
+```
+
+## ActionChains & Wait
 
 
 
