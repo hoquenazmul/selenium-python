@@ -4,7 +4,8 @@
 
 1. [WebDriver Setup](#webdriver-setup)
 2. [Common WebDriver Properties](#common-webdriver-properties)
-3. [BrowserOptions & DesiredCapabilities](browseroptions--desiredcapabilities)
+3. [BrowserOptions & DesiredCapabilities](#browseroptions--desiredcapabilities)
+4. [Window Size, Handles & Screenshot](#window-size-handles--screenshot)
 
 ## WebDriver Setup
 ```python
@@ -31,6 +32,8 @@ driver = webdriver.Firefox(service=service)
 driver = webdriver.Ie(service=service)
 driver = webdriver.Edge(service=service)
 ```
+**[⬆ back to top](#table-of-contents)**
+
 ## Common WebDriver Properties
 ```python
 from selenium import webdriver
@@ -64,6 +67,7 @@ driver.close()
 driver.quit()
 ```
 **[⬆ back to top](#table-of-contents)**
+
 ## BrowserOptions & DesiredCapabilities
 BrowserOptions or DesiredCapabilities, uesed to customize and configure the default behavior of a browser. Since DesiredCapabilities used for all browsers (common conf.), so it has some limitation because different browser manage their configuration in a different way. To overcome this situation, we have BrowserOptions for each and every browser like ChromeOptions, FirefoxOptions & EdgeOptions etc.
 ```python
@@ -92,6 +96,35 @@ caps['acceptInsecureCerts'] = True # solve the unsecured website open problem
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options,
                           desired_capabilities=caps)
 driver.get('https://www.google.com/')
+```
+**[⬆ back to top](#table-of-contents)**
+
+## Window Size, Handles & Screenshot
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+driver.get('https://the-internet.herokuapp.com/windows')
+driver.find_element(By.LINK_TEXT, 'Click Here').click()
+```
+```python
+driver.set_window_size(width=1920, height=1080)
+driver.get_window_size() # {'width': 1920, 'height': 1080}
+driver.maximize_window()
+driver.minimize_window()
+driver.fullscreen_window()
+```
+```python
+driver.current_window_handle # parent window
+driver.window_handles # list of all open windows
+```
+```python
+driver.get_screenshot_as_file('test.png')
+# or
+driver.save_screenshot('test.png')
 ```
 **[⬆ back to top](#table-of-contents)**
 
