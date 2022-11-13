@@ -257,6 +257,32 @@ ActionChains(driver)\
 ```
 **[⬆ back to top](#table-of-contents)**
 
+## Wait
+> Implicit Wait
+```python
+driver.implicitly_wait(5)
+```
+> Explicit Wait
+```python
+driver = Chrome()
+element = WebDriverWait(driver, timeout=3).until(lambda dv: dv.find_element(By.TAG_NAME, "p"))
+assert element.text == "Hello World"
+```
+```python
+clickable = driver.find_element(By.ID, "test")
+wait = WebDriverWait(driver, timeout=10)
+wait.until(expected_conditions.element_to_be_clickable(clickable)) 
+# available => alert is present, element is visible
+```
+> Fluent Wait
+```python
+driver = Firefox()
+driver.get("http://somedomain/url_that_delays_loading")
+wait = WebDriverWait(driver, timeout=10, poll_frequency=1, ignored_exceptions=[ElementNotVisibleException])
+element = wait.until(EC.element_to_be_clickable((By.XPATH, "//div")))
+```
+**[⬆ back to top](#table-of-contents)**
+
 
 
 
