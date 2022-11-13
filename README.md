@@ -3,7 +3,8 @@
 ## Table of Contents
 
 1. [WebDriver Setup](#webdriver-setup)
-2. [BrowserOptions & DesiredCapabilities](browseroptions--desiredcapabilities)
+2. [Common WebDriver Properties](#common-webdriver-properties)
+3. [BrowserOptions & DesiredCapabilities](browseroptions--desiredcapabilities)
 
 ## WebDriver Setup
 ```python
@@ -30,6 +31,39 @@ driver = webdriver.Firefox(service=service)
 driver = webdriver.Ie(service=service)
 driver = webdriver.Edge(service=service)
 ```
+## Common WebDriver Properties
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
+driver.get('https://google.com')
+driver.delete_all_cookies()
+driver.implicitly_wait(5)
+driver.set_page_load_timeout(30)
+
+driver.title
+driver.current_url
+```
+```python
+driver.switch_to.default_content() # window(window_name), alert, iframe(iframe)
+element = driver.find_element(By.XPATH, 'xpath')
+driver.find_elements()
+driver.execute_script('return arguments[0].innerText', element)
+```
+```python
+driver.back()
+driver.forward()
+driver.refresh()
+
+driver.close()
+driver.quit()
+```
+**[⬆ back to top](#table-of-contents)**
 ## BrowserOptions & DesiredCapabilities
 BrowserOptions or DesiredCapabilities, uesed to customize and configure the default behavior of a browser. Since DesiredCapabilities used for all browsers (common conf.), so it has some limitation because different browser manage their configuration in a different way. To overcome this situation, we have BrowserOptions for each and every browser like ChromeOptions, FirefoxOptions & EdgeOptions etc.
 ```python
@@ -57,8 +91,9 @@ caps['acceptInsecureCerts'] = True # solve the unsecured website open problem
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options,
                           desired_capabilities=caps)
-driver.get('http://www.google.com/')
+driver.get('https://www.google.com/')
 ```
+**[⬆ back to top](#table-of-contents)**
 
 
 
