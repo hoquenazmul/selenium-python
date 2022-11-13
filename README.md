@@ -7,7 +7,7 @@
 3. [BrowserOptions & DesiredCapabilities](#browseroptions--desiredcapabilities)
 4. [Window Size, Handles & Screenshot](#window-size-handles--screenshot)
 5. [Alert, iFrame & Cookie](#alert-iframe--cookie)
-6. [ActionChains & Wait](#actionchains--wait)
+6. [ActionChains](#actionchains)
 
 ## WebDriver Setup
 ```python
@@ -172,7 +172,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=ops)
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 driver.get('https://the-internet.herokuapp.com')
 
 driver.add_cookie({"name": "foo", "value": "bar"})
@@ -181,8 +181,81 @@ driver.get_cookies()
 driver.delete_cookie("foo")
 driver.delete_all_cookies()
 ```
+**[⬆ back to top](#table-of-contents)**
 
-## ActionChains & Wait
+## ActionChains
+```python
+clickable = driver.find_element(By.ID, "clickable")
+
+ActionChains(driver)\
+    .move_to_element(clickable)\
+    .pause(1)\
+    .click_and_hold()\
+    .pause(1)\
+    .send_keys("abc")\
+    .perform()
+```
+```python
+# to clear the existing driver state of all the input items
+ActionBuilder(driver).clear_actions()
+```
+>Keyboard Actions
+```python
+ActionChains(driver)\
+    .key_down(Keys.SHIFT)\
+    .send_keys("abc")\
+    .perform() # ABC
+```
+```python
+ActionChains(driver)\
+    .key_down(Keys.SHIFT)\
+    .send_keys("a")\
+    .key_up(Keys.SHIFT)\
+    .send_keys("b")\
+    .perform() # Ab
+```
+```python
+ActionChains(driver)\
+    .send_keys("ab")\
+    .perform() # ab
+```
+```python
+text_input = driver.find_element(By.ID, "textInput")
+ActionChains(driver)\
+    .send_keys_to_element(text_input, "abc")\
+    .perform()
+```
+> Mouse Actions
+```python
+clickable = driver.find_element(By.ID, "clickable")
+ActionChains(driver)\
+    .click(clickable)\
+    .perform()
+```
+```python
+clickable = driver.find_element(By.ID, "clickable")
+ActionChains(driver)\
+    .context_click(clickable)\
+    .perform()
+
+ActionChains(driver)\
+    .double_click(clickable)\
+    .perform()
+```
+```python
+hoverable = driver.find_element(By.ID, "hover")
+ActionChains(driver)\
+    .move_to_element(hoverable)\
+    .perform()
+```
+```pytnon
+draggable = driver.find_element(By.ID, "draggable")
+droppable = driver.find_element(By.ID, "droppable")
+ActionChains(driver)\
+    .drag_and_drop(draggable, droppable)\
+    .perform()
+```
+**[⬆ back to top](#table-of-contents)**
 
 
 
