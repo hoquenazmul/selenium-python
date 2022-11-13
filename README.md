@@ -326,7 +326,22 @@ select.select_by_index(0) # Python
 
 ## Logging
 ```python
+import logging
 
+def test_log():
+    log = logging.getLogger(__name__) # to get the current module
+    file_handler = logging.FileHandler("app.log", mode='w') # w for new log after removing old log
+    file_format = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s | %(message)s')
+    file_handler.setFormatter(file_format)
+
+    log.addHandler(file_handler)
+    log.setLevel(logging.DEBUG)
+
+    log.info("Info Log")
+    log.debug("Debug Log")
+    log.warning("Warning Log")
+    log.critical("Critical Log")
+    log.error("Error Log")
 ```
 **[⬆ back to top](#table-of-contents)**
 
