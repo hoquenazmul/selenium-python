@@ -8,6 +8,11 @@
 4. [Window Size, Handles & Screenshot](#window-size-handles--screenshot)
 5. [Alert, iFrame & Cookie](#alert-iframe--cookie)
 6. [ActionChains](#actionchains)
+7. [Wait & Select](#wait--select)
+8. [Xpath](#xpath)
+9. [CSS Selector](#css-selector)
+10. [Pytest](#pytest)
+11. [Logging](#logging)
 
 ## WebDriver Setup
 ```python
@@ -257,7 +262,7 @@ ActionChains(driver)\
 ```
 **[⬆ back to top](#table-of-contents)**
 
-## Wait
+## Wait & Select
 > Implicit Wait
 ```python
 driver.implicitly_wait(5)
@@ -283,6 +288,29 @@ element = wait.until(EC.element_to_be_clickable((By.XPATH, "//div")))
 ```
 **[⬆ back to top](#table-of-contents)**
 
+## Xpath
+```python
+
+```
+**[⬆ back to top](#table-of-contents)**
+
+## CSS Selector
+```python
+
+```
+**[⬆ back to top](#table-of-contents)**
+
+## Pytest
+```python
+
+```
+**[⬆ back to top](#table-of-contents)**
+
+## Logging
+```python
+
+```
+**[⬆ back to top](#table-of-contents)**
 
 
 
