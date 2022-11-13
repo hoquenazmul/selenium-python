@@ -286,6 +286,24 @@ driver.get("http://somedomain/url_that_delays_loading")
 wait = WebDriverWait(driver, timeout=10, poll_frequency=1, ignored_exceptions=[ElementNotVisibleException])
 element = wait.until(EC.element_to_be_clickable((By.XPATH, "//div")))
 ```
+#### Select 
+```html
+<select name="lang" id="lang">
+    <option selected="selected" value="python">Python</option>
+    <option value="java">Java</option>
+    <option value="javascript">JavaScript</option>
+</select>
+```
+```python
+element = driver.find_element(By.ID, "lang")
+select = Select(element)
+option_list = select.options # get all the option list
+```
+```python
+select.select_by_visible_text('Java') # Java
+select.select_by_value('javascript') # JavaScript
+select.select_by_index(0) # Python
+```
 **[⬆ back to top](#table-of-contents)**
 
 ## Xpath
