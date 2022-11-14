@@ -381,15 +381,15 @@ select.select_by_index(0) # Python
 //h5[@class = 'card-title']//following-sibling::a <!-- 1 of 2 -->
 //h5[@class = 'card-title']//following-sibling::a[1] <!-- 1 of 1 -->
 ```
-**Child::** represents all the child elements
+**Child:** represents all the child elements
 ```html
 //div[@role= 'group']//child::a[1]
 //div[@class= 'card-body']//child::a
 //div[@class= 'card-body']//child::p
 ```
-**Child::** represents only the immediate parent element
+**Parent:** represents only the immediate parent element
 ```html
-//a[contains(@id, 'another')]//parent::div <!-- refer immediate one (.card-)-->
+//a[contains(@id, 'another')]//parent::div <!-- refer immediate one (.card-) -->
 ```
 **[⬆ back to top](#table-of-contents)**
 
@@ -409,15 +409,43 @@ select.select_by_index(0) # Python
               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
               <p class="card-text">Some quick example text to build on the card title</p>
               <a href="#" class="card-link" aria-label="card-link">Card link</a>
-              <a href="#" class="card-link" aria-label="another-link">Another link</a>
+              <a href="#" id="another-76980" class="card-link" aria-label="another-link">Another link</a>
           </div>
       </div>
     </div>
 </body>
 </html>
 ```
-```python
-
+> CSS Selector Formula: tagName[attribute=value]
+```html
+a[aria-label = 'card-link']
+a[aria-label='card-link'][class = 'card-link'] <!-- indicates multiple attr -->
+```
+**Child Element**
+```html
+div[role='group']>div>div>p <!-- '>' indicates immediate child only -->
+div[role='group'] div p <!-- ' ' indicates immediate or not immediate child -->
+```
+**Class**
+```html
+<!-- '.' indicates class -->
+.card-title
+h5.card-title
+a.card-link[aria-label='another-link']
+h5[class='card-title']
+a[id='another-76980'][class='card-link']
+.card-subtitle.mb-2.text-muted <!-- indicates who has multiple classes -->
+.card-link#another-76980 <!-- indicates who has class & id both -->
+```
+**ID**
+```html
+<!-- '#' indicates ID -->
+#another-76980
+a#another-76980
+a#another-76980[aria-label='another-link']
+a[id='another-76980']
+a[id='another-76980'][class='card-link']
+a#another-76980.card-link <!-- indicates who has class & id both -->
 ```
 **[⬆ back to top](#table-of-contents)**
 
