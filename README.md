@@ -341,26 +341,35 @@ select.select_by_index(0) # Python
 ```
 /html/body/div/div/div/h5
 ```
-**and/or**
+**AND/OR:**
 ```
 //a[@aria-label = 'card-link' and @class='card-link']
 //a[@aria-label = 'card-link' or @class='card-link']
 ``` 
-**text()** only used for text and it should be matched properly whatever mentioned on DOM. 
+**text():** only used for text and it should be matched properly whatever mentioned on DOM. 
 ```
 //p[text() = 'Some quick example text to build on the card title']
 ```
-**contains()** used for text & html attribute both and match fully or partially with text or attribute value. No need to match exactly whatever mentioned on DOM, partial match should be okay
+**contains():** used for text & html attribute both and match fully or partially with text or attribute value. No need to match exactly whatever mentioned on DOM, partial match should be okay
 ```
 //p[contains(text(), 'on the card title')]
 //p[contains(@class, 'card-text')]
 ```
-**starts-with()** used to match the starting characters of a text or attribute value 
+**starts-with():** used to match the starting characters of a text or attribute value 
 ```
 //p[starts-with(text(), 'Some quick example')]
 //a[starts-with(@id, 'another')]
 ```
-
+**Ancestor/পূর্বপুরুষ:** It refers all previous elements if they have child-parent relationships
+```html
+//p[@class='card-text']//ancestor::html <!-- 1 of 1 -->
+//p[@class='card-text']//ancestor::head <!-- 0 of 0 -->
+```
+**Preceding/পূর্ববর্তী:** If refers all previous elements if the don't have child-parent relationships.
+```html
+//p[@class='card-text']//preceding::html <!-- 0 of 0 -->
+//p[@class='card-text']//preceding::head <!-- 1 of 1 -->
+```
 **[⬆ back to top](#table-of-contents)**
 
 ## CSS Selector
