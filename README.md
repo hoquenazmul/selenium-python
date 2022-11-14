@@ -365,10 +365,31 @@ select.select_by_index(0) # Python
 //p[@class='card-text']//ancestor::html <!-- 1 of 1 -->
 //p[@class='card-text']//ancestor::head <!-- 0 of 0 -->
 ```
-**Preceding/পূর্ববর্তী:** If refers all previous elements if the don't have child-parent relationships.
+**Descendant/বংশধর:** It refers all next elements if they have child-parent relationships
+```html
+//div[@role = 'group']//descendant::a <!-- 1 of 2 -->
+//div[@role = 'group']//descendant::a[contains(@id, 'another')] <!-- 1 of 1 -->
+```
+**Preceding/পূর্ববর্তী:** It refers all previous elements if the don't have child-parent relationships.
 ```html
 //p[@class='card-text']//preceding::html <!-- 0 of 0 -->
 //p[@class='card-text']//preceding::head <!-- 1 of 1 -->
+```
+**Following Sibling:** It refers only the same level html elements. not upper or lower level.
+```html
+//h5[@class = 'card-title']//following-sibling::h6 <!-- 1 of 1 -->
+//h5[@class = 'card-title']//following-sibling::a <!-- 1 of 2 -->
+//h5[@class = 'card-title']//following-sibling::a[1] <!-- 1 of 1 -->
+```
+**Child::** represents all the child elements
+```html
+//div[@role= 'group']//child::a[1]
+//div[@class= 'card-body']//child::a
+//div[@class= 'card-body']//child::p
+```
+**Child::** represents only the immediate parent element
+```html
+//a[contains(@id, 'another')]//parent::div <!-- refer immediate one (.card-)-->
 ```
 **[⬆ back to top](#table-of-contents)**
 
