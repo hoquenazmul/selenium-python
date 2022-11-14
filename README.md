@@ -308,36 +308,64 @@ select.select_by_index(0) # Python
 
 ## Xpath
 ```html
-<div role="group" aria-label="card-wrapper">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xpath & CSS Selector</title>
+</head>
+<body>
+    <div role="group" aria-label="card-wrapper">
+      <div class="card" style="width: 18rem;">
+          <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title</p>
+              <a href="#" class="card-link" aria-label="card-link">Card link</a>
+              <a href="#" class="card-link" aria-label="another-link">Another link</a>
+          </div>
+      </div>
     </div>
-</div>
+</body>
+</html>
 ```
+**Relative:** Create Xpath from anywhere on a web page or we can directly grab the desire element if we've unique web element using double forward slash (//). It's more safe since in here we don't need to maintain relationship from very first node 'html' to desire element.
 ```python
-
+# Xpath Formula => //* or tagName[@attribute='attributeValue']
+//a[@aria-label='card-link']
+```
+**Absolute:** It maintains relationships from very first 'html' tag to desire web element using single forward slash(/). If developer modify or remove any web element of absolute xpath in future, it will not work. 
+```html
+/html/body/div/div/div/h5
+```
+```
+//a[@aria-label='card-link' and @class='card-link']
+//a[@aria-label='card-link' or @class='card-link']
 ```
 **[⬆ back to top](#table-of-contents)**
 
 ## CSS Selector
 ```html
-<div role="group" aria-label="card-wrapper">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xpath & CSS Selector</title>
+</head>
+<body>
+    <div role="group" aria-label="card-wrapper">
+      <div class="card" style="width: 18rem;">
+          <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title</p>
+              <a href="#" class="card-link" aria-label="card-link">Card link</a>
+              <a href="#" class="card-link" aria-label="another-link">Another link</a>
+          </div>
+      </div>
     </div>
-</div>
+</body>
+</html>
 ```
 ```python
 
