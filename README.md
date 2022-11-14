@@ -329,7 +329,7 @@ select.select_by_index(0) # Python
 </body>
 </html>
 ```
-**Relative:** Create Xpath from anywhere on a web page or we can directly grab the desire element if we've unique web element using double forward slash (//). It's more safe since in here we don't need to maintain relationship from very first node 'html' to desire element.
+**Relative:** Create Xpath from anywhere on a web page or we can directly grab the desire element if we've unique attribute using double forward slash (//). It's more safe since in here we don't need to maintain relationship from very first node 'html' to desire element.
 ```python
 # Xpath Formula => //* or tagName[@attribute='attributeValue']
 //a[@aria-label = 'card-link']
@@ -355,7 +355,7 @@ select.select_by_index(0) # Python
 //p[contains(text(), 'on the card title')]
 //p[contains(@class, 'card-text')]
 ```
-**starts-with():** used to match the starting characters of a text or attribute value 
+**starts-with():** used to match from the starting characters of a text or attribute value 
 ```
 //p[starts-with(text(), 'Some quick example')]
 //a[starts-with(@id, 'another')]
@@ -450,8 +450,100 @@ a#another-76980.card-link <!-- indicates who has class & id both -->
 **[⬆ back to top](#table-of-contents)**
 
 ## Pytest
-```python
+To execute code using pytest, need to follow the convention below
+|         |Example            |
+|---------|-------------------|
+|file     |`test_login`       |
+|method   |`"test_login()"`   |
+|class    |`TestLogin`        |
+```console
+<!-- pytest commands -->
 
+$ pytest -v -s
+$ pytest -k "mobile"
+$ pytest -k "not mobile"
+
+$ pytest -m "regression"
+$ pytest -m "not regression"
+
+$ pytest module_name.py
+```
+Register the new mark in pytest.ini file
+```bat
+[pytest]
+
+markers =
+    smoke: representing smoke test cases
+    regression: representing regression test cases
+```
+**Fixture**
+```python
+# file -> conftest.py
+
+import pytest
+
+@pytest.fixture()
+def setup():
+    print("Executing First")
+    yield
+    print("Executing Last")
+```
+```python
+# file -> test_login.py 
+
+def test_login(setup):
+    print("login success")
+
+# Executing First
+# login success
+# Executing Last
+```
+Fixture as Data Provider
+```python
+# file -> conftest.py
+
+import pytest
+
+@pytest.fixture(params=["firefox", "chorme"])
+def browser(request):
+    return request.param
+
+@pytest.fixture(scope='class')
+def setup():
+    print("Executing First")
+    yield
+    print("Executing Last")
+
+@pytest.fixture(scope='class')
+def clear_cache():
+    print("cache cleared")
+```
+```python
+# file -> test_login.py
+
+import pytest
+
+@pytest.mark.usefixtures('clear_cache', 'setup')
+class TestLogin:
+    def test_initiate_browser(self, browser):
+        print("Initiated", browser)
+
+    def test_login(self):
+        print("Login Test")
+
+# cache cleared
+# Executing First
+# Initiated firefox
+# Initiated chorme
+# Login Test
+# Executing Last
+```
+For Reporting
+```console
+$ pip install pytest-html
+
+<!-- command to generate report -->
+$ pytest --html=report.html --css=highcontrast.css --css=accessible.css
 ```
 **[⬆ back to top](#table-of-contents)**
 
