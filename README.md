@@ -322,7 +322,7 @@ select.select_by_index(0) # Python
               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
               <p class="card-text">Some quick example text to build on the card title</p>
               <a href="#" class="card-link" aria-label="card-link">Card link</a>
-              <a href="#" class="card-link" aria-label="another-link">Another link</a>
+              <a href="#" id="another-76980" class="card-link" aria-label="another-link">Another link</a>
           </div>
       </div>
     </div>
@@ -332,16 +332,35 @@ select.select_by_index(0) # Python
 **Relative:** Create Xpath from anywhere on a web page or we can directly grab the desire element if we've unique web element using double forward slash (//). It's more safe since in here we don't need to maintain relationship from very first node 'html' to desire element.
 ```python
 # Xpath Formula => //* or tagName[@attribute='attributeValue']
-//a[@aria-label='card-link']
+//a[@aria-label = 'card-link']
+//div[@class='card-body']//h5
+//div[@class='card-body']//h5[@class='card-title']
+//div[@role='group']//h5
 ```
 **Absolute:** It maintains relationships from very first 'html' tag to desire web element using single forward slash(/). If developer modify or remove any web element of absolute xpath in future, it will not work. 
-```html
+```
 /html/body/div/div/div/h5
 ```
+**and/or**
 ```
-//a[@aria-label='card-link' and @class='card-link']
-//a[@aria-label='card-link' or @class='card-link']
+//a[@aria-label = 'card-link' and @class='card-link']
+//a[@aria-label = 'card-link' or @class='card-link']
+``` 
+**text()** only used for text and it should be matched properly whatever mentioned on DOM. 
 ```
+//p[text() = 'Some quick example text to build on the card title']
+```
+**contains()** used for text & html attribute both and match fully or partially with text or attribute value. No need to match exactly whatever mentioned on DOM, partial match should be okay
+```
+//p[contains(text(), 'on the card title')]
+//p[contains(@class, 'card-text')]
+```
+**starts-with()** used to match the starting characters of a text or attribute value 
+```
+//p[starts-with(text(), 'Some quick example')]
+//a[starts-with(@id, 'another')]
+```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## CSS Selector
