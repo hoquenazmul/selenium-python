@@ -498,6 +498,23 @@ def test_login(setup):
 # login success
 # Executing Last
 ```
+```python
+# A good example
+import pytest
+
+@pytest.fixture()
+def driver():
+    driver = webdriver.Chrome()
+    driver.implicitly_wait(5)
+    driver.maximize_window()
+    yield driver 
+    driver.close()
+
+
+def test_app_url(driver):
+    driver.get("https://google.com")
+```
+
 Fixture as Data Provider
 ```python
 # file -> conftest.py
@@ -538,6 +555,14 @@ class TestLogin:
 # Login Test
 # Executing Last
 ```
+**Fixture Scope**
+|scope|definition
+|-----|---------
+|@pytest.fixture()|default => Function Level (each function)
+|@pytest.fixture(scope='class')|Class Level
+|@pytest.fixture(scope='module')| Module Level
+|@pytest.fixture(scope='session')|for Each pytest execution or `pytest command`
+
 For Reporting
 ```console
 $ pip install pytest-html
