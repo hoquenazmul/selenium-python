@@ -391,6 +391,33 @@ select.select_by_index(0) # Python
 ```html
 //a[contains(@id, 'another')]//parent::div <!-- refer immediate one (.card-) -->
 ```
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mark</td>
+      <td>1102</td>
+    </tr>
+    <tr>
+      <td>Jacob</td>
+      <td>1101</td>
+    </tr>
+  </tbody>
+</table>
+```
+```html
+//table//tbody//tr//td[1] <!-- Mark -->
+//table//tbody//tr[2]//td[1] <!-- Jacob -->
+//table//tbody//tr[2]//td[position()= 2] <!-- 1101 -->
+<!-- or -->
+//table//tbody//tr[2]//td[2]
+```
 **[⬆ back to top](#table-of-contents)**
 
 ## CSS Selector
