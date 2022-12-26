@@ -391,6 +391,7 @@ select.select_by_index(0) # Python
 ```html
 //a[contains(@id, 'another')]//parent::div <!-- refer immediate one (.card-) -->
 ```
+**Table**
 ```html
 <table>
   <thead>
